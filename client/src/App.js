@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { base_url } from './Sevices/API';
 import { store } from './Redux/store';
 import {getData} from "./Redux/actions"
+import Filter from './Components/Filters';
 
 export default function App() {
   const [data ,setData]=useState([]);
@@ -32,9 +33,9 @@ export default function App() {
     <ResponsiveAppBar />
     <div id='Container'>
 
-      {load ? <CircularIndeterminate/>:  <div id="cardcontainer">
+      {load ? <CircularIndeterminate/>:<><Filter/>  <div id="cardcontainer">
      
-  
+    
       {data.map((elem)=>{
      
          return <Card key={elem._id} {...elem}/>
@@ -45,7 +46,7 @@ export default function App() {
          
    
   
-   </div>}
+   </div></>}
     </div>
   
    
