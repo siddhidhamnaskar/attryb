@@ -20,7 +20,7 @@ export default function EditCar(){
 
    useEffect(()=>{
 
-    fetch(`${base_url}/blogs/${id}`)
+    fetch(`${base_url}/car/cars/${id}`)
     .then((res)=>{
        res.json().then((json)=>{
         console.log(json.Title);
@@ -28,8 +28,8 @@ export default function EditCar(){
         setPrice(json.Price);
         setContent(json.Discription);
         setColor(json.Color);
-        setMileage(json.mileage);
-        
+        setMileage(json.Mileage);
+
        });
     })
    
@@ -68,27 +68,27 @@ export default function EditCar(){
         alert("Please Enter Required Field");
       })
    }
-    const inputstyle={
+   const inputstyle={
       
-        width:"90%",
-        margin:"auto",
-        height:"10px",
-        marginTop:"40px",
-        marginBottom:"40px"
-      
+    width:"80%",
+    margin:"auto",
+    height:"5px",
+    marginTop:"40px",
+    marginBottom:"40px"
+  
 
-    }
-    const paperStyle={
-        width:"90%",
-        height:"550px",
-        margin:"auto",
-        marginTop:"30px",
-        display:"flex",
-        alignItems:"center",
-        justifiedContent:"center",
-        textAlign:"center"
+}
+const paperStyle={
+    width:"50%",
+    height:"110vh",
+    margin:"auto",
+    marginTop:"30px",
+    display:"flex",
+    alignItems:"center",
+    justifiedContent:"center",
+    textAlign:"center"
 
-    }
+}
     const modules = {
         toolbar: [
           [{ header: [1, 2, false] }],
@@ -108,7 +108,7 @@ export default function EditCar(){
       <ResponsiveAppBar/>
     <Paper elevation={20} style={paperStyle}>
         <form style={{width:"100%",height:"100%"}} onSubmit={updateData}>
-            <Typography style={{fontSize:"30px",fontWeight:"bold",marginTop:"20px"}}>SELL YOUR CAR</Typography>
+            <Typography style={{fontSize:"30px",fontWeight:"bold",marginTop:"20px"}}>EDIT YOUR CAR</Typography>
             <TextField
     required
     id="outlined-required"
