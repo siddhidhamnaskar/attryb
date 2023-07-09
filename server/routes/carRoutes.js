@@ -44,14 +44,14 @@ const storage = multer.diskStorage({
     }
   }
 
-  const upload = multer({ storage: storage, fileFilter:fileFilter });
+  const upload = multer({ storage: storage});
 
 
 
 carRouter.get("/cars",async(req,res)=>{
 
     try{
-      console.log(1);
+    
         const car=await cars.find().sort({createdAt:-1})
         res.status(200).json(car)
 
@@ -77,43 +77,39 @@ carRouter.get("/cars/:id",async(req,res)=>{
 
   
 
-carRouter.post("/post",upload.single('file'),async(req,res)=>{
+carRouter.post("/post",upload.array('file[]',2),async(req,res)=>{
     try{
       
-
-      
+      console.log(1);
+       const urls=[];
+       const files=req.files;
        
-        
-  
-        
-         
-         
+       for(const file of files)
+       {
+         const {path}=file;
+         const res=await cloudinary.uploader.upload(path)
+         // console.log(res.secure_url);
+         urls.push(res.secure_url);
+         // console.log(urls[0]);
+          fs.unlinkSync(path);
+
+       }
       
         
-           let token=req.body.token;
-       jwt.verify(token ,secret,{},async(err,info)=>{
-            if(err) throw err;
-        // console.log(urls);
-        
-        const {path}=req.file
-        const result=await cloudinary.uploader.upload(path)
-   
-        const url=result.secure_url;
-   
-         fs.unlinkSync(path);
+      
 
         const car=new cars({
-            Image:url,
+            Image:urls[0],
             Title:req.body.title,
             Price:req.body.price,
             Color:req.body.color,
             Mileage:req.body.mileage,
             Discription:req.body.discription,
-            Author:info.id
+            Author:req.body.id
            })
           const Cars=await car.save();
           res.status(200).json(Cars);
-        })
+        
     }
     catch(err){
       console.log(2);
