@@ -80,12 +80,13 @@ carRouter.get("/cars/:id",async(req,res)=>{
 carRouter.post("/post",upload.array('file[]',2),async(req,res)=>{
     try{
       
-      console.log(1);
+      
        const urls=[];
        const files=req.files;
        
        for(const file of files)
        {
+        console.log(1);
          const {path}=file;
          const res=await cloudinary.uploader.upload(path)
          // console.log(res.secure_url);
