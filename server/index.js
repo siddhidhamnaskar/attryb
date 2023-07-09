@@ -9,7 +9,7 @@ dotenv.config();
 const app=express();
 const PORT=process.env.PORT;
  app.set("view engine", "ejs")
-// app.use(cors());
+app.use(cors());
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
 app.use(express.json());
