@@ -10,6 +10,7 @@ const carSchema=new mongoose.Schema({
     Color:{type:String,required:true},
     Mileage:{type:Number,required:true},
     Discription:{type:String},
+    Author:{type:Schema.Types.ObjectId,ref:'User'}
   
    
 },{

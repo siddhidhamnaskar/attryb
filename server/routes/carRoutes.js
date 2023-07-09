@@ -111,6 +111,7 @@ carRouter.post("/post",upload.array('file[]',50),async(req,res)=>{
         Color:req.body.color,
         Mileage:req.body.mileage,
         Discription:req.body.discription,
+        Author:req.body.id
        
        })
       const Cars=await car.save();
