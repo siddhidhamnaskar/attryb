@@ -3,12 +3,15 @@ const dotenv=require("dotenv");
 const connection=require("./config/db");
 const cors=require("cors");
 const userRouter=require("./routes/userRoutes");
-const carRouter=require("./routes/carRoutes")
+const carRouter=require("./routes/carRoutes");
+const bodyparser=require("body-parser");
 dotenv.config();
 const app=express();
 const PORT=process.env.PORT;
 
 app.use(cors());
+app.use(bodyparser.urlencoded({ extended: true }))
+app.use(bodyparser.json())
 app.use(express.json());
 
 app.use("/",userRouter)

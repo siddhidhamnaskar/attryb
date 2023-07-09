@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "cloudinary": "^1.37.3",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -14,7 +15,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"npm i"
+    "build": "npm i"
   },
   "keywords": [],
   "author": "",
