@@ -77,47 +77,92 @@ carRouter.get("/cars/:id",async(req,res)=>{
 
   
 
-carRouter.post("/post",upload.array('file[]',2),async(req,res)=>{
-    try{
+// carRouter.post("/post",upload.array('file[]',2),async(req,res)=>{
+//     try{
       
       
-       const urls=[];
-       const files=req.files;
+//        const urls=[];
+//        const files=req.files;
        
-       for(const file of files)
-       {
-        console.log(1);
-         const {path}=file;
-         const res=await cloudinary.uploader.upload(path)
-         // console.log(res.secure_url);
-         urls.push(res.secure_url);
-         // console.log(urls[0]);
-          fs.unlinkSync(path);
+//        for(const file of files)
+//        {
+//         console.log(1);
+//          const {path}=file;
+//          const res=await cloudinary.uploader.upload(path)
+//          // console.log(res.secure_url);
+//          urls.push(res.secure_url);
+//          // console.log(urls[0]);
+//           fs.unlinkSync(path);
 
-       }
+//        }
       
         
       
 
-        const car=new cars({
-            Image:urls[0],
-            Title:req.body.title,
-            Price:req.body.price,
-            Color:req.body.color,
-            Mileage:req.body.mileage,
-            Discription:req.body.discription,
-            Author:req.body.id
-           })
-          const Cars=await car.save();
-          res.status(200).json(Cars);
+//         const car=new cars({
+//             Image:urls[0],
+//             Title:req.body.title,
+//             Price:req.body.price,
+//             Color:req.body.color,
+//             Mileage:req.body.mileage,
+//             Discription:req.body.discription,
+//             Author:req.body.id
+//            })
+//           const Cars=await car.save();
+//           res.status(200).json(Cars);
         
-    }
-    catch(err){
-      console.log(2);
-        res.status(505).json(err)
-    }
+//     }
+//     catch(err){
+//       console.log(2);
+//         res.status(505).json(err)
+//     }
 
     
+// })
+
+carRouter.post("/post",upload.array('file[]',50),async(req,res)=>{
+  try{
+    
+
+       const urls=[];
+      const files=req.files;
+      
+      for(const file of files)
+      {
+        const {path}=file;
+        const res=await cloudinary.uploader.upload(path)
+        // console.log(res.secure_url);
+        urls.push(res.secure_url);
+        // console.log(urls[0]);
+         fs.unlinkSync(path);
+
+      }
+       
+       
+    
+      
+   
+
+      // console.log(urls);
+      
+      const car=new cars({
+        Image:urls[0],
+        Title:req.body.title,
+        Price:req.body.price,
+        Color:req.body.color,
+        Mileage:req.body.mileage,
+        Discription:req.body.discription,
+        Author:req.body.id
+       })
+      const Cars=await car.save();
+      res.status(200).json(Cars);
+  }
+  catch(err){
+
+      res.status(505).json(err)
+  }
+
+  
 })
 
 carRouter.put("/edit/:id",upload.single('file'),async(req,res)=>{
