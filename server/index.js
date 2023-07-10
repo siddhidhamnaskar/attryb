@@ -11,12 +11,12 @@ const PORT=process.env.PORT;
  app.set("view engine", "ejs")
 app.use(cors());
 
-app.use(bodyparser.urlencoded({ extended: false }))
+app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
 app.use(express.json());
-
-app.use("/",userRouter)
 app.use("/car",carRouter)
+app.use("/",userRouter)
+
 
 app.listen(PORT,()=>{
     try{
