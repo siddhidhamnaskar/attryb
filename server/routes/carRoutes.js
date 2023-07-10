@@ -1,15 +1,11 @@
 const cars=require("../models/carModel")
 
 const router=require("express");
-
-
 const carRouter=router();
 const fs =require('fs');
-const jwt=require('jsonwebtoken');
 
 const dotenv=require("dotenv");
 dotenv.config();
-const secret=process.env.SECRET;
 const cloudinary=require("cloudinary");
 
 cloudinary.config({
@@ -19,16 +15,14 @@ cloudinary.config({
 
 })
 
-
-const upload=require("../ImageUpload/multer")
-
+const upload=require('../ImageUpload/multer')
 
 
 
 carRouter.get("/cars",async(req,res)=>{
 
     try{
-    
+      console.log(1);
         const car=await cars.find().sort({createdAt:-1})
         res.status(200).json(car)
 
@@ -39,7 +33,7 @@ carRouter.get("/cars",async(req,res)=>{
 
 })
 
-carRouter.get("/cars/:id",async(req,res)=>{
+carRouter.get("/car/:id",async(req,res)=>{
     try{
       const car=await cars.findById(req.params.id)
       res.status(200).json(car)
@@ -54,83 +48,80 @@ carRouter.get("/cars/:id",async(req,res)=>{
 
   
 
+carRouter.post("/post",upload.array('file[]',2),async(req,res)=>{
+    try{
+      
 
+         const urls=[];
+        const files=req.files;
+        
+        for(const file of files)
+        {
+          const {path}=file;
+          const res=await cloudinary.uploader.upload(path)
+          // console.log(res.secure_url);
+          urls.push(res.secure_url);
+          // console.log(urls[0]);
+           fs.unlinkSync(path);
 
-carRouter.post("/post",upload.array('file[]',50),async(req,res)=>{
-  try{
+        }
+         
+         
+      
+        
+     
+
+        // console.log(urls);
+        const post=new cars({
+          Image:urls[0],
+          Title:req.body.title,
+          Price:req.body.price,
+          Color:req.body.color,
+          Mileage:req.body.mileage,
+          Discription:req.body.discription
+          
+          })
+          const Cars=await post.save();
+          res.status(200).json(Cars);
+    }
+    catch(err){
+
+        res.status(505).json(err)
+    }
+
     
-
-       const urls=[];
-      const files=req.files;
-      
-      for(const file of files)
-      {
-        const {path}=file;
-        const res=await cloudinary.uploader.upload(path)
-        // console.log(res.secure_url);
-        urls.push(res.secure_url);
-        // console.log(urls[0]);
-         fs.unlinkSync(path);
-
-      }
-       
-       
-    
-      
-   
-
-      // console.log(urls);
-      
-      const car=new cars({
-        Image:urls[0],
-        Title:req.body.title,
-        Price:req.body.price,
-        Color:req.body.color,
-        Mileage:req.body.mileage,
-        Discription:req.body.discription,
-        Author:req.body.id
-       
-       })
-      const Cars=await car.save();
-      res.status(200).json(Cars);
-  }
-  catch(err){
-
-      res.status(505).json(err)
-  }
-
-  
 })
 
-carRouter.put("/edit/:id",upload.single('file'),async(req,res)=>{
+carRouter.put("/edit/:id",upload.array('file[]',2),async(req,res)=>{
     try{
       const car=await cars.findById(req.params.id)
        car.Title=req.body.title;
        car.Price=req.body.price;
-       car.Color=req.body.color;
+       car.Color=req.body.Color;
        car.Mileage=req.body.mileage;
        car.Discription=req.body.discription;
-       if(req.file)
+       if(req.files)
        {
-     
+        const urls=[];
+        const files=req.files;
         
-        
-      
-          const {path}=req.file;
+        for(const file of files)
+        {
+          const {path}=file;
           const res=await cloudinary.uploader.upload(path)
-         
-          const url=res.secure_url
-      
+          //  console.log(res.secure_url);
+          urls.push(res.secure_url);
+          // console.log(urls[0]);
            fs.unlinkSync(path);
 
-        
-        car.Image=url
+        }
+        blog.img=urls[0]
   
        }
   
   
-       const post=await car.save();
-       res.status(200).json(post);
+       const Car=await car.save();
+       res.status(200).json(Car);
   
   
     }
@@ -145,9 +136,7 @@ carRouter.put("/edit/:id",upload.single('file'),async(req,res)=>{
     try{
 
         const car=await cars.findByIdAndDelete(req.params.id);
-        const Cars=await cars.find().sort({createdAt:-1})
-        res.status(200).json(Cars)
-       
+        res.status(200).json(car);
 
     }
     catch(err){
