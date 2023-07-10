@@ -9,8 +9,9 @@ dotenv.config();
 const app=express();
 const PORT=process.env.PORT;
  app.set("view engine", "ejs")
-app.use(cors({origin:"http://localhost:3000"}));
-app.use(bodyparser.urlencoded({ extended: true }))
+app.use(cors());
+
+app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json())
 app.use(express.json());
 
