@@ -62,7 +62,7 @@ carRouter.post("/post",upload.array('file[]',2),async(req,res)=>{
           // console.log(res.secure_url);
           urls.push(res.secure_url);
           // console.log(urls[0]);
-           fs.unlinkSync(path);
+          //  fs.unlinkSync(path);
 
         }
          

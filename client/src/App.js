@@ -21,7 +21,7 @@ export default function App() {
   })
     
   useEffect(()=>{
-    fetch(`${base_url}/car/cars`)
+    fetch(`${base_url}/cars`)
     .then((res)=>res.json())
     .then((json)=>{store.dispatch(getData(json))})
     .catch((err)=>console.log("Error"));

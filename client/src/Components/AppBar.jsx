@@ -52,7 +52,7 @@ function ResponsiveAppBar() {
   console.log(userInfo);
   var token=localStorage.getItem('token')||"";
   console.log(token);
-     fetch(`${base_url}/profile`,{
+     fetch(`${base_url}/user/profile`,{
       method:"post",
       headers:{
         "Content-type":"application/json"

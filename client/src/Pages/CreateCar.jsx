@@ -33,7 +33,7 @@ export default function CreateCar(){
       data.set('id',userInfo.id);
   
       console.log(file[0]);
-      fetch(`${base_url}/car/post`,{
+      fetch(`${base_url}/post`,{
         method:"POST",
          body:data,
        

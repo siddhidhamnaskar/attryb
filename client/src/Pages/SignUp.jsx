@@ -13,7 +13,7 @@ export default function Signup(){
     const navigate=useNavigate();
     const register=()=>{
       try{
-        fetch(`${base_url}/signup`,{
+        fetch(`${base_url}/user/signup`,{
           method:"POST",
           headers:{
             "Content-Type":"application/json"

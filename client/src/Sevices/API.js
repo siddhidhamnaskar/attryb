@@ -1,1 +1,1 @@
-export const base_url="https://attryb-hcu4.onrender.com"
+export const base_url="https://byuc.onrender.com"

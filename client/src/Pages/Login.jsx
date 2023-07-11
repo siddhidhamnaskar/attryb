@@ -34,7 +34,7 @@ export default function Login(){
   const login=(e)=>{
     e.preventDefault();
     setLoad(true);
-     fetch(`${base_url}/login`,{
+     fetch(`${base_url}/user/login`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
