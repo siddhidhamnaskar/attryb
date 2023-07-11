@@ -5,7 +5,7 @@ dotenv.config();
 const app=express();
 const userRouter=require("./routes/userRoutes")
 const carRouter=require("./routes/carRoutes")
-const connection=require("./Config/db")
+const connection=require("./config/db")
 // const server=require("http").createServer(app);
 const bodyparser=require("body-parser");
 //  const io=require('socket.io')(server,{cors:{origin:'*'}})

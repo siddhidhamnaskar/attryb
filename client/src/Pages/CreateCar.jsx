@@ -18,16 +18,19 @@ export default function CreateCar(){
    const navigate=useNavigate();
    const postData=(e)=>{
     e.preventDefault();
-    let token=localStorage.getItem('token')||"";
-    console.log(file[0]);
+    // let token=localStorage.getItem('token')||"";
+    console.log(userInfo.id);
       const data=new FormData();
       data.set('title',title);
       data.set('price',price);
       data.set('color',color);
       data.set('mileage',mileage);
-      data.set('file',file[0]);
+      for (let i = 0; i < file.length; i++) {
+        data.append('file[]', file[i]);
+     }
+      
       data.set('discription',content);
-      data.set('token',token);
+      data.set('id',userInfo.id);
   
       console.log(file[0]);
       fetch(`${base_url}/car/post`,{
@@ -37,11 +40,13 @@ export default function CreateCar(){
 
       })
       .then((res)=>{
+        console.log(res);
         alert("Created Succesfully");
         navigate("/");
          
       })
       .catch((err)=>{
+        console.log(err)
         alert("Please Enter Required Field");
       })
    }
@@ -104,11 +109,13 @@ export default function CreateCar(){
     id="outlined-required"
     type="file"
     name="file"
-   
-    onChange={(e)=>setFile(e.target.files)}
-   
- 
-    style={inputstyle} 
+    inputProps={{
+      multiple: true
+    }}
+
+  onChange={(e)=>setFile(e.target.files)}
+  
+   style={inputstyle} 
   />
       <TextField
     required

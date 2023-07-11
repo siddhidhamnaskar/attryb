@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { store } from "../Redux/store";
 import { getData } from "../Redux/actions";
 
-export default function Card({Title,Image,Price,Color,Mileage,Discription,_id,Author}){
+export default function Card({Title,Image,Price,Color,Mileage,Discription,_id}){
 
     const {userInfo,setUserInfo} =React.useContext(UserContext);
     const navigate=useNavigate();
@@ -54,11 +54,11 @@ export default function Card({Title,Image,Price,Color,Mileage,Discription,_id,Au
                                     
                                 </div>
                                 </div>
-                                {userInfo.id===Author.id ? 
+                                {/* {userInfo.id===Author.id ? 
                                 null:<div className="updateButtons">
                                 <Link to={`./edit/${_id}`}>Edit</Link>
                                 <p style={{marginTop:"-1px",color:"blue",textDecoration:"underline",cursor:"pointer"}} onClick={()=>deleteCar(_id)}>Delete</p>
-                            </div>}
+                            </div>} */}
 
                                
 
