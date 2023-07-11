@@ -14,6 +14,6 @@ const carSchema=new mongoose.Schema({
     timestamps:true
 })
 
-const carModel=mongoose.model("blog",carSchema);
+const carModel=mongoose.model("car",carSchema);
 
 module.exports=carModel

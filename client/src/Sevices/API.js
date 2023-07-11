@@ -1,1 +1,1 @@
-export const base_url="https://nyx-m7qn.onrender.com"
+export const base_url="https://attryb-hcu4.onrender.com"
