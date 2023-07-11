@@ -149,6 +149,19 @@ carRouter.put("/edit/:id",upload.array('file[]',2),async(req,res)=>{
   })
 
 
+  carRouter.get("/myCars/",async(req,res)=>{
+    try{
+      //  console.log(req.query);
+      const carData=await Post.find(req.query).populate('Author',['Name']).sort({createdAt:-1}).limit(20);
+      // console.log(blogData);
+      res.status(200).json(carData);
+  
+    }
+    catch(err){
+      res.status(505).json(err);
+    }
+  })
+
   
   module.exports=carRouter;
 
