@@ -10,7 +10,7 @@ export default function Filter() {
 
 
     const resetData=()=>{
-        fetch(`${base_url}/car/cars`)
+        fetch(`${base_url}/cars`)
         .then((res)=>res.json())
         .then((json)=>{store.dispatch(getData(json))})
         .catch((err)=>console.log("Error"));

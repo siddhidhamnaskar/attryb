@@ -20,7 +20,7 @@ export default function EditCar(){
 
    useEffect(()=>{
 
-    fetch(`${base_url}/car/cars/${id}`)
+    fetch(`${base_url}/car/${id}`)
     .then((res)=>{
        res.json().then((json)=>{
         console.log(json.Title);

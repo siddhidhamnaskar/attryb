@@ -12,7 +12,7 @@ export default function Card({Title,Image,Price,Color,Mileage,Discription,_id,Au
     const {userInfo,setUserInfo} =React.useContext(UserContext);
     const navigate=useNavigate();
     const deleteCar=(id)=>{
-        fetch(`${base_url}/car/delete/${id}`,{
+        fetch(`${base_url}/delete/${id}`,{
             method:"DELETE"
         })
         .then((res)=>{

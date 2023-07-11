@@ -137,7 +137,9 @@ carRouter.put("/edit/:id",upload.array('file[]',2),async(req,res)=>{
     try{
 
         const car=await cars.findByIdAndDelete(req.params.id);
-        res.status(200).json(car);
+        const Cars=await cars.find().sort({createdAt:-1})
+        res.status(200).json(Cars)
+        
 
     }
     catch(err){
