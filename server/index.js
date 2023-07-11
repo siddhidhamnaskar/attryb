@@ -25,9 +25,9 @@ app.use(bodyparser.json())
  
 
  app.use(express.json());
- app.use('/',userRouter)
+ app.use('/user',userRouter)
 
-app.use("/car",carRouter)
+app.use("/",carRouter)
 app.listen(PORT,()=>{
     try{
         connection();

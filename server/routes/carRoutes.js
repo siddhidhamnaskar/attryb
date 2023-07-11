@@ -78,7 +78,8 @@ carRouter.post("/post",upload.array('file[]',2),async(req,res)=>{
           Price:req.body.price,
           Color:req.body.color,
           Mileage:req.body.mileage,
-          Discription:req.body.discription
+          Discription:req.body.discription,
+          Author:req.body.id
           
           })
           const Cars=await post.save();
