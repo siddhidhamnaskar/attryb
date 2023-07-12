@@ -2,15 +2,18 @@ import logo from './logo.svg';
 import './App.css';
 import ResponsiveAppBar from './Components/AppBar';
 import CircularIndeterminate from './Components/Loader';
+import LinearProgress from '@mui/material/LinearProgress';
 import Card from './Components/Card';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { base_url } from './Sevices/API';
 import { store } from './Redux/store';
 import {getData} from "./Redux/actions"
 import Filter from './Components/Filters';
+import { UserContext } from './Components/Usercontext';
 
 export default function App() {
+  const {loader,setLoader}=useContext(UserContext)
   const [data ,setData]=useState([]);
   const [load,setLoad]=useState(true);
 
@@ -18,6 +21,7 @@ export default function App() {
      console.log(store.getState().data);
     setData(store.getState().data)
     setLoad(false)
+    setLoader(false)
   })
     
   useEffect(()=>{
@@ -31,9 +35,11 @@ export default function App() {
   
   return <>
     <ResponsiveAppBar />
+    {loader ? <LinearProgress/>:null}
     <div id='Container'>
+    <Filter/> 
 
-      {load ? <CircularIndeterminate/>:<><Filter/>  <div id="cardcontainer">
+      {load ? <CircularIndeterminate/>:<> <div id="cardcontainer">
      
     
       {data.map((elem)=>{

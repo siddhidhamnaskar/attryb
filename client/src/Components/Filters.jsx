@@ -3,13 +3,16 @@ import "../App.css";
 import { base_url } from '../Sevices/API';
 import { store } from '../Redux/store';
 import { getData } from '../Redux/actions';
+import { useContext } from 'react';
+import { UserContext } from './Usercontext';
 
 export default function Filter() {
-    // const [filter, setFilter] = useState("");
+    const {loader,setLoader}=useContext(UserContext)
 
 
 
     const resetData=()=>{
+        setLoader(true)
         fetch(`${base_url}/cars`)
         .then((res)=>res.json())
         .then((json)=>{store.dispatch(getData(json))})
@@ -18,6 +21,7 @@ export default function Filter() {
     }
 
     const below40=()=>{
+        setLoader(true)
         fetch(`${base_url}/below40`)
         .then((res)=>{
              return res.json();
@@ -28,6 +32,7 @@ export default function Filter() {
     }
 
     const above40=()=>{
+        setLoader(true)
         fetch(`${base_url}/above40`)
         .then((res)=>{
              return res.json();
@@ -38,6 +43,7 @@ export default function Filter() {
     }
     
     const lth=()=>{
+        setLoader(true)
         fetch(`${base_url}/lth`)
         .then((res)=>{
              return res.json();
@@ -48,6 +54,7 @@ export default function Filter() {
     }
     
     const htl=()=>{
+        setLoader(true)
         fetch(`${base_url}/htl`)
         .then((res)=>{
              return res.json();
@@ -59,6 +66,7 @@ export default function Filter() {
     
 
     const byColor=(color)=>{
+        setLoader(true)
         fetch(`${base_url}/byColor/?Color=${color}`)
         .then((res)=>{
             return res.json();

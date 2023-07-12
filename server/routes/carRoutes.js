@@ -201,7 +201,7 @@ carRouter.put("/edit/:id",upload.array('file[]',2),async(req,res)=>{
 
       const Cars=await cars.find();
       const sortData=Cars.sort((a,b)=>{
-        return a.Price-b.Price
+        return b.Price-a.Price
       })
 
       res.status(200).json(sortData);
@@ -218,7 +218,7 @@ carRouter.put("/edit/:id",upload.array('file[]',2),async(req,res)=>{
 
       const Cars=await cars.find();
       const sortData=Cars.sort((a,b)=>{
-        return b.Price-a.Price
+        return a.Price-b.Price
       })
 
       res.status(200).json(sortData);
