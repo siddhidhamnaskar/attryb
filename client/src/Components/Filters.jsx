@@ -17,8 +17,58 @@ export default function Filter() {
 
     }
 
+    const below40=()=>{
+        fetch(`${base_url}/below40`)
+        .then((res)=>{
+             return res.json();
+        })
+        .then((json)=>{
+            store.dispatch(getData(json))
+        })
+    }
 
+    const above40=()=>{
+        fetch(`${base_url}/above40`)
+        .then((res)=>{
+             return res.json();
+        })
+        .then((json)=>{
+            store.dispatch(getData(json))
+        })
+    }
+    
+    const lth=()=>{
+        fetch(`${base_url}/lth`)
+        .then((res)=>{
+             return res.json();
+        })
+        .then((json)=>{
+            store.dispatch(getData(json))
+        })
+    }
+    
+    const htl=()=>{
+        fetch(`${base_url}/htl`)
+        .then((res)=>{
+             return res.json();
+        })
+        .then((json)=>{
+            store.dispatch(getData(json))
+        })
+    }
+    
 
+    const byColor=(color)=>{
+        fetch(`${base_url}/byColor/?Color=${color}`)
+        .then((res)=>{
+            return res.json();
+        })
+        .then((json)=>{
+            store.dispatch(getData(json))
+
+        })
+
+    }
    
 
    
@@ -46,12 +96,12 @@ export default function Filter() {
 
 
                         {/* Kmps below */}
-                        <div>
+                        <div onClick={below40}>
                             <button className='btn'>
                                 <i class="fa-solid fa-road"></i><br />
                                 <p> Km 40 <i class="fa-sharp fa-solid fa-arrow-down"></i></p>  </button>
                         </div>
-                        <div>
+                        <div onClick={above40}>
                             <button className='btn' >
                                 <i class="fa-solid fa-road"></i><br />
                                 <p> Km 40 <i class="fa-sharp fa-solid fa-arrow-up"></i></p>  </button>
@@ -68,7 +118,7 @@ export default function Filter() {
                      <p>By Price</p>
                     <div className='FilterBox'>
                         {/* Kmps above */}
-                        <div>
+                        <div onClick={htl}>
                             <button className='btn' >
                                 <i class="fa-sharp fa-solid fa-arrow-up"></i>
                                 <i class="fa-solid fa-indian-rupee-sign"></i> <br />
@@ -78,7 +128,7 @@ export default function Filter() {
 
 
                         {/* low to high price */}
-                        <div>
+                        <div onClick={lth}>
                             <button className='btn' >
                                 <i class="fa-sharp fa-solid fa-arrow-down"></i>
                                 <i class="fa-solid fa-indian-rupee-sign"></i> <br />
@@ -101,12 +151,12 @@ export default function Filter() {
 
                 <p>By Color</p>
                 <div className='ColorBox'>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div onClick={()=>byColor('Red')}></div>
+                    <div  onClick={()=>byColor('Orrange')}></div>
+                    <div  onClick={()=>byColor('White')}></div>
+                    <div  onClick={()=>byColor('Black')}></div>
+                    <div  onClick={()=>byColor('Blue')}></div>
+                    <div  onClick={()=>byColor('Green')}></div>
                 </div>
                 <hr style={{ border: "1px solid grey" }} />
                

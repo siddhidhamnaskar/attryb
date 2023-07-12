@@ -23,7 +23,7 @@ carRouter.get("/cars",async(req,res)=>{
 
     try{
       console.log(1);
-        const car=await cars.find().sort({createdAt:-1})
+        const car=await cars.find().sort({createdAt:-1}).limit(10)
         res.status(200).json(car)
 
     }
@@ -152,8 +152,8 @@ carRouter.put("/edit/:id",upload.array('file[]',2),async(req,res)=>{
   carRouter.get("/myCars/",async(req,res)=>{
     try{
       //  console.log(req.query);
-      const carData=await Post.find(req.query).populate('Author',['Name']).sort({createdAt:-1}).limit(20);
-      // console.log(blogData);
+      const carData=await cars.find(req.query).sort({createdAt:-1}).limit(20);
+      // console.log(carData);
       res.status(200).json(carData);
   
     }
@@ -162,6 +162,86 @@ carRouter.put("/edit/:id",upload.array('file[]',2),async(req,res)=>{
     }
   })
 
+  carRouter.get("/below40",async(req,res)=>{
+    try{
+
+      const Cars=await cars.find().sort({createdAt:-1});
+
+      const filterData=Cars.filter((elem)=>{
+        return elem.Mileage <=40;
+         
+      })
+      res.status(200).json(filterData)
+
+    }
+    catch(err){
+      res.status(505).json(err);
+    }
+  })
+
+  carRouter.get("/above40",async(req,res)=>{
+    try{
+
+      const Cars=await cars.find().sort({createdAt:-1});
+
+      const filterData=Cars.filter((elem)=>{
+        return elem.Mileage >=40;
+         
+      })
+      res.status(200).json(filterData)
+
+    }
+    catch(err){
+      res.status(505).json(err);
+    }
+  })
+
+  carRouter.get("/htl",async(req,res)=>{
+    try{
+
+      const Cars=await cars.find();
+      const sortData=Cars.sort((a,b)=>{
+        return a.Price-b.Price
+      })
+
+      res.status(200).json(sortData);
+
+    }
+    catch(err){
+      res.status(505).json(err);
+
+    }
+  })
+
+  carRouter.get("/lth",async(req,res)=>{
+    try{
+
+      const Cars=await cars.find();
+      const sortData=Cars.sort((a,b)=>{
+        return b.Price-a.Price
+      })
+
+      res.status(200).json(sortData);
+
+    }
+    catch(err){
+      res.status(505).json(err);
+
+    }
+  })
+
+
+  carRouter.get('/byColor/',async(req,res)=>{
+    try{
+      const carData=await cars.find(req.query).sort({createdAt:-1});
+      res.status(200).json(carData);
+
+    }
+    catch(err){
+      res.status(505).json(err);
+
+    }
+  })
   
   module.exports=carRouter;
 

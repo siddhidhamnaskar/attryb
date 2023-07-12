@@ -42,6 +42,8 @@ export default function App() {
         
 
      })}
+
+     {data.length==0 ? <p>No Results Found</p>:null}
         
          
    
