@@ -3,6 +3,7 @@
 const mongoose=require("mongoose");
 const {Schema}=require("mongoose");
 const carSchema=new mongoose.Schema({
+    id:{type:Number,required:true},
     Image:{type:String,required:true},
     Title:{type:String,required:true},
     Price:{type:Number,required:true},
