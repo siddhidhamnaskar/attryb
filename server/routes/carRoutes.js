@@ -19,7 +19,7 @@ const upload=require('../ImageUpload/multer')
 
 
 
-carRouter.get("/cars",async(req,res)=>{
+carRouter.get("/",async(req,res)=>{
 
     try{
       console.log(1);
