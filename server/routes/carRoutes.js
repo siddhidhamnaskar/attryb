@@ -74,8 +74,8 @@ carRouter.post("/post",upload.array('file[]',2),async(req,res)=>{
         // console.log(urls);
         const post=new cars({
         
-          Title:req.body.title,
-          Price:req.body.price,
+          Title:req.body.Title,
+          Price:req.body.Price,
           // Color:req.body.color,
           // Mileage:req.body.mileage,
           // Discription:req.body.discription,
@@ -96,8 +96,8 @@ carRouter.post("/post",upload.array('file[]',2),async(req,res)=>{
 carRouter.put("/edit/:id",upload.array('file[]',2),async(req,res)=>{
     try{
       const car=await cars.findById(req.params.id)
-       car.Title=req.body.title;
-       car.Price=req.body.price;
+       car.Title=req.body.Title;
+       car.Price=req.body.Price;
       //  car.Color=req.body.Color;
       //  car.Mileage=req.body.mileage;
       //  car.Discription=req.body.discription;
